@@ -4,6 +4,8 @@
   "description": "'Parser' pentru cod numeric personal (CNP)",
   "main": "src/parsecnp.js",
   "scripts": {
+    "build": "rollup --config",
+    "dev": "rollup --config --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +22,12 @@
   "bugs": {
     "url": "https://github.com/kislakiruben/parsecnp/issues"
   },
-  "homepage": "https://github.com/kislakiruben/parsecnp#readme"
+  "homepage": "https://github.com/kislakiruben/parsecnp#readme",
+  "devDependencies": {
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-latest": "^6.24.1",
+    "rollup": "^0.41.6",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-watch": "^3.2.2"
+  }
 }
