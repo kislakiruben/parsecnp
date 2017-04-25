@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rollup --config",
     "dev": "rollup --config --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --require babel-register ./test/"
   },
   "repository": "git+https://kislakiruben@github.com/kislakiruben/parsecnp.git",
   "keywords": [
@@ -24,6 +24,9 @@
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-es2015-rollup": "^3.0.0",
     "babel-preset-latest": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "chai": "^3.5.0",
+    "mocha": "^3.3.0",
     "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-watch": "^3.2.2"
