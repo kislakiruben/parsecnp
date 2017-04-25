@@ -1,0 +1,24 @@
+{
+  "name": "parsecnp",
+  "version": "0.1.0",
+  "description": "'Parser' pentru cod numeric personal (CNP)",
+  "main": "src/parsecnp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://kislakiruben@github.com/kislakiruben/parsecnp.git"
+  },
+  "keywords": [
+    "cnp",
+    "parser",
+    "javsacript"
+  ],
+  "author": "Ruben Kislaki",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kislakiruben/parsecnp/issues"
+  },
+  "homepage": "https://github.com/kislakiruben/parsecnp#readme"
+}
