@@ -8,10 +8,7 @@
     "dev": "rollup --config --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://kislakiruben@github.com/kislakiruben/parsecnp.git"
-  },
+  "repository": "git+https://kislakiruben@github.com/kislakiruben/parsecnp.git",
   "keywords": [
     "cnp",
     "parser",
