@@ -1,6 +1,6 @@
 import { checksumValidator } from "./checksumParser";
 import countyParser, { countyValidator } from './countyParser';
-import dateParser from './dateParser';
+import dateParser, { dateValidator } from './dateParser';
 import { serialValidator } from "./serialParser";
 import sexParser, { sexValidator } from './sexParser';
 
@@ -21,7 +21,7 @@ export default class Parser {
     }
 
     get birthdate() {
-        return dateParser(this.raw.birthdate);
+        return dateParser(this.raw.sex, this.raw.birthdate);
     }
 
     get day() {
@@ -53,7 +53,7 @@ export default class Parser {
         const countyIsValid = countyValidator(this.raw.county);
         const serialIsValid = serialValidator(this.raw.serial);
         const checksumIsValid = checksumValidator(this.raw.cnp, this.raw.checksum);
-        const dateIsValid = true;
+        const dateIsValid = dateValidator(this.birthdate);
 
         return sexIsValid
             && dateIsValid
