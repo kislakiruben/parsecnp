@@ -68,11 +68,11 @@ export default class Parser {
 
     toJSON() {
         return JSON.stringify({
-            sex: this.sex,
-            county: this.county,
             birthdate: this.birthdate,
-            serial: this.serial,
             checksum: this.checksum,
+            county: this.county,
+            serial: this.serial,
+            sex: this.sex,
         });
     }
 }
