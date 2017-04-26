@@ -1,11 +1,11 @@
 {
   "name": "parsecnp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "'Parser' pentru cod numeric personal (CNP)",
   "main": "src/parsecnp.js",
   "scripts": {
-    "build": "rollup --config",
-    "dev": "rollup --config --watch",
+    "build": "rollup --config rollup.config.dist.js",
+    "dev": "rollup --config rollup.config.dev.js --watch",
     "test": "mocha --require babel-register ./test/"
   },
   "repository": "git+https://kislakiruben@github.com/kislakiruben/parsecnp.git",
@@ -29,6 +29,8 @@
     "mocha": "^3.3.0",
     "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.7.1",
-    "rollup-watch": "^3.2.2"
+    "rollup-plugin-uglify": "^1.0.2",
+    "rollup-watch": "^3.2.2",
+    "uglify-js-harmony": "^2.7.5"
   }
 }
