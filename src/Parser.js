@@ -6,21 +6,22 @@ import sexParser, { sexValidator } from './sexParser';
 
 export default class Parser {
     constructor(CNP) {
-        this.raw = CNP;
+        this.raw = {
+            cnp: CNP,
+            sex: CNP.charAt(0),
+            birthdate: CNP.substr(1,6),
+            county: CNP.substr(7,2),
+            serial: CNP.substr(9,3),
+            checksum: CNP.charAt(12),
+        };
     }
 
     get sex() {
-        const sexCode = this.regex(1);
-
-        return sexParser(sexCode);
+        return sexParser(this.raw.sex);
     }
 
     get birthdate() {
-        const day = this.regex(4);
-        const month = this.regex(3) - 1; // month is zero indexed
-        const year = this.regex(2);
-
-        return dateParser(year, month, day);
+        return dateParser(this.raw.birthdate);
     }
 
     get day() {
@@ -36,24 +37,22 @@ export default class Parser {
     }
 
     get county() {
-        const countyCode = this.regex(5);
-
-        return countyParser(countyCode);
+        return countyParser(this.raw.county);
     }
 
     get serial() {
-        return this.regex(6);
+        return this.raw.serial;
     }
 
     get checksum() {
-        return this.regex(7);
+        return this.raw.checksum;
     }
 
     get isValid() {
-        const sexIsValid = sexValidator(this.regex(1))
-        const countyIsValid = countyValidator(this.regex(5));
-        const serialIsValid = serialValidator(this.regex(6));
-        const checksumIsValid = checksumValidator(this.raw, this.regex(7));
+        const sexIsValid = sexValidator(this.raw.sex)
+        const countyIsValid = countyValidator(this.raw.county);
+        const serialIsValid = serialValidator(this.raw.serial);
+        const checksumIsValid = checksumValidator(this.raw.cnp, this.raw.checksum);
         const dateIsValid = true;
 
         return sexIsValid
@@ -75,11 +74,5 @@ export default class Parser {
             serial: this.serial,
             checksum: this.checksum,
         });
-    }
-
-    regex(captureGroup) {
-        const match = /(^\d)(\d{2})(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])(\d{2})(\d{3})(\d)/.exec(this.raw);
-
-        return match[captureGroup];
     }
 }
