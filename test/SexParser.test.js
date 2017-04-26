@@ -39,7 +39,7 @@ describe(`sexParser`, () => {
         expect(sexParser(8)).to.be.string('female');
     });
 
-    it(`should return 'not kwown' for sex code 9`, () => {
-        expect(sexParser(9)).to.be.string('not kwown');
+    it(`should return 'not applicable' for sex code 9`, () => {
+        expect(sexParser(9)).to.be.string('not applicable');
     });
 });
