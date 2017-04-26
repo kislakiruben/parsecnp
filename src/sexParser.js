@@ -1,3 +1,5 @@
+import { includes, keys } from "./utils";
+
 const SEX_ISO_CODE = {
     0: 'not kwown',
     1: 'male',
@@ -21,4 +23,11 @@ const sexParser = (sexCode) => {
     return sexMapping[sexCode] || SEX_ISO_CODE[0];
 }
 
-export { sexParser as default };
+const sexValidator = (sexCode) => {
+    return includes(keys(sexMapping), sexCode);
+}
+
+export {
+    sexParser as default,
+    sexValidator,
+};

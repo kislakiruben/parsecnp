@@ -1,6 +1,8 @@
-import countyParser from './countyParser';
+import { checksumValidator } from "./checksumParser";
+import countyParser, { countyValidator } from './countyParser';
 import dateParser from './dateParser';
-import sexParser from './sexParser';
+import { serialValidator } from "./serialParser";
+import sexParser, { sexValidator } from './sexParser';
 
 export default class Parser {
     constructor(CNP) {
@@ -47,6 +49,20 @@ export default class Parser {
         return this.regex(7);
     }
 
+    get isValid() {
+        const sexIsValid = sexValidator(this.regex(1))
+        const countyIsValid = countyValidator(this.regex(5));
+        const serialIsValid = serialValidator(this.regex(6));
+        const checksumIsValid = checksumValidator(this.raw, this.regex(7));
+        const dateIsValid = true;
+
+        return sexIsValid
+            && dateIsValid
+            && countyIsValid
+            && serialIsValid
+            && checksumIsValid;
+    }
+
     toString() {
         return this.raw.toString();
     }
@@ -62,7 +78,7 @@ export default class Parser {
     }
 
     regex(captureGroup) {
-        const match = /(^[1-8])(\d{2})(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])(\d{2})(\d{3})(\d)/.exec(this.raw);
+        const match = /(^\d)(\d{2})(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])(\d{2})(\d{3})(\d)/.exec(this.raw);
 
         return match[captureGroup];
     }
