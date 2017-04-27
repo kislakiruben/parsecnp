@@ -1,7 +1,7 @@
-import { checksumValidator } from "./checksumParser";
+import { checksumValidator } from './checksumParser';
 import countyParser, { countyValidator } from './countyParser';
 import dateParser, { dateValidator } from './dateParser';
-import { serialValidator } from "./serialParser";
+import { serialValidator } from './serialParser';
 import sexParser, { sexValidator } from './sexParser';
 
 export default class Parser {

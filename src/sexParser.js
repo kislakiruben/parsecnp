@@ -1,4 +1,4 @@
-import { includes, keys } from "./utils";
+import { includes, keys } from './utils';
 
 const SEX_ISO_CODE = {
     0: 'not kwown',
@@ -19,13 +19,8 @@ const sexMapping = {
     9: SEX_ISO_CODE[9],
 };
 
-const sexParser = (sexCode) => {
-    return sexMapping[sexCode] || SEX_ISO_CODE[0];
-}
-
-const sexValidator = (sexCode) => {
-    return includes(keys(sexMapping), sexCode);
-}
+const sexParser = (sexCode) => sexMapping[sexCode] || SEX_ISO_CODE[0];
+const sexValidator = (sexCode) => includes(keys(sexMapping), sexCode);
 
 export {
     sexParser as default,

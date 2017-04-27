@@ -1,10 +1,6 @@
-const includes = (array, item) => {
-    return array.includes(item);
-};
+const includes = (array, item) => array.includes(item);
 
-const keys = (collection) => {
-    return Object.keys(collection);
-};
+const keys = (collection) => Object.keys(collection);
 
 const isValidDate = (year, month, day) => {
     const date = new Date(year, month - 1, day);
