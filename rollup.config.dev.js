@@ -1,7 +1,7 @@
 import babel from 'rollup-plugin-babel';
 
 export default {
-    entry: 'src/parsecnp.js',
+    entry: 'src/ParseCNP.js',
     format: 'umd',
     plugins: [
         babel({
@@ -11,5 +11,5 @@ export default {
         })
     ],
     moduleName: 'ParseCNP',
-    dest: 'dist/parsecnp.min.js',
+    dest: 'dist/ParseCNP.min.js',
 };

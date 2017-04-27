@@ -12,7 +12,7 @@ yarn add parsecnp
 ```
 In a browser
 ```html
-<script src="dist/parsecnp.min.js"></script>
+<script src="dist/ParseCNP.min.js"></script>
 ```
 
 ## Usage

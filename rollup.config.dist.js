@@ -3,7 +3,7 @@ import uglify from 'rollup-plugin-uglify';
 import { minify } from 'uglify-js-harmony';
 
 export default {
-    entry: 'src/parsecnp.js',
+    entry: 'src/ParseCNP.js',
     format: 'umd',
     plugins: [
         babel({
@@ -14,5 +14,5 @@ export default {
         uglify({}, minify),
     ],
     moduleName: 'ParseCNP',
-    dest: 'dist/parsecnp.min.js',
+    dest: 'dist/ParseCNP.min.js',
 };

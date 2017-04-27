@@ -1,8 +1,8 @@
 {
   "name": "parsecnp",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "'Parser' pentru cod numeric personal (CNP)",
-  "main": "src/parsecnp.js",
+  "main": "src/ParseCNP.js",
   "scripts": {
     "build": "rollup --config rollup.config.dist.js",
     "dev": "rollup --config rollup.config.dev.js --watch",
