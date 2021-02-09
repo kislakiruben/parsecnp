@@ -4,7 +4,7 @@ const checksumValidator = (cnp, checksum) => {
         return accumulator + value * CONSTANT.charAt(index);
     }, 0);
     const computedChecksum = reducer % 11;
-    const validator = (computedChecksum === 0 || computedChecksum === 10) ? 1 : computedChecksum;
+    const validator = computedChecksum === 10 ? 1 : computedChecksum;
 
     return parseInt(checksum, 10) === validator;
 }
