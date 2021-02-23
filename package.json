@@ -1,6 +1,6 @@
 {
   "name": "parsecnp",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "'Parser' pentru cod numeric personal (CNP)",
   "main": "src/ParseCNP.js",
   "scripts": {
