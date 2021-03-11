@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { default as sexParser } from '../src/SexParser';
+import { default as sexParser } from '../src/sexParser';
 
 describe(`sexParser`, () => {
     it(`should return 'not kwown' for sex code 0`, () => {
