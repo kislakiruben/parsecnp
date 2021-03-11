@@ -1,7 +1,7 @@
 name: Publish to npm
 on:
   release:
-    types: [created]
+    types: [published]
 
 jobs:
   build:
@@ -24,7 +24,11 @@ jobs:
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
+      - run: yarn config set version-git-message "Released v%s"
+      - run: yarn version ${{github.event.release.tag_name}}
       - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-
+      - run: git push
+        env:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
