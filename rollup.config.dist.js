@@ -1,18 +1,17 @@
-import babel from 'rollup-plugin-babel';
-import uglify from 'rollup-plugin-uglify';
-import { minify } from 'uglify-js-harmony';
+import babel from '@rollup/plugin-babel';
+import { terser } from "rollup-plugin-terser";
 
 export default {
-    entry: 'src/ParseCNP.js',
-    format: 'umd',
+    input: 'src/ParseCNP.js',
     plugins: [
         babel({
-            exclude: 'node_modules/**',
-            presets: [ 'es2015-rollup' ],
-            babelrc: false,
+            babelHelpers: 'bundled'
         }),
-        uglify({}, minify),
+        terser(),
     ],
-    moduleName: 'ParseCNP',
-    dest: 'dist/ParseCNP.min.js',
+    output: {
+        file: 'dist/ParseCNP.min.js',
+        format: 'umd',
+        name: 'ParseCNP',
+    },
 };
