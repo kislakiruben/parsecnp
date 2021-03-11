@@ -25,12 +25,12 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org/
       - run: yarn config set version-git-message "Released v%s"
+      - run: git config user.email "ruben@kislaki.net"
+      - run: git config user.name "Ruben"
       - run: yarn version --new-version ${{ github.event.release.tag_name }}
       - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: git config user.email "ruben@kislaki.net"
-      - run: git config user.name "Ruben"
       - run: git push
         env:
           github-token: ${{ secrets.GITHUB_TOKEN }}
