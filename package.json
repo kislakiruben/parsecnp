@@ -6,7 +6,8 @@
   "scripts": {
     "build": "rollup --config rollup.config.dist.js",
     "dev": "rollup --config rollup.config.dev.js --watch",
-    "test": "mocha --require babel-register ./test/"
+    "test": "mocha --require babel-register ./test/",
+    "coverage": "nyc mocha --require babel-register ./test/"
   },
   "repository": "git+https://kislakiruben@github.com/kislakiruben/parsecnp.git",
   "keywords": [
@@ -27,6 +28,7 @@
     "babel-register": "^6.24.1",
     "chai": "^3.5.0",
     "mocha": "^3.3.0",
+    "nyc": "^15.1.0",
     "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-uglify": "^1.0.2",
