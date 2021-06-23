@@ -14,7 +14,6 @@ const dateParser = (sexCode, birthdate) => {
     const month = birthdate.substr(2, 2);
     const day = birthdate.substr(4, 2);
     let year = `${centuryMapping[sexCode]}${birthdate.substr(0, 2)}`;
-    if (year > (new Date()).getFullYear() - 14) year = `${year - 100}`
     const date = new Date(year, month - 1, day);
 
     return isValidDate(year, month, day) ? date : new Date('');
