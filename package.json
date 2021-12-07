@@ -1,25 +1,26 @@
 {
-  "name": "parsecnp",
-  "version": "0.1.4",
+  "name": "@regily/parsecnp",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "version": "0.1.5",
   "description": "'Parser' pentru cod numeric personal (CNP)",
   "main": "src/ParseCNP.js",
   "scripts": {
     "build": "rollup --config rollup.config.dist.js",
-    "dev": "rollup --config rollup.config.dev.js --watch",
-    "test": "mocha --require babel-register ./test/"
+    "dev": "rollup --config rollup.config.dev.js --watch"
   },
-  "repository": "git+https://kislakiruben@github.com/kislakiruben/parsecnp.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Regily/parsecnp.git"
+  },
+  "license": "MIT",
+  "author": "Checking.com",
   "keywords": [
     "cnp",
     "parser",
-    "javsacript"
+    "javascript"
   ],
-  "author": "Ruben Kislaki",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/kislakiruben/parsecnp/issues"
-  },
-  "homepage": "https://github.com/kislakiruben/parsecnp#readme",
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-es2015-rollup": "^3.0.0",
