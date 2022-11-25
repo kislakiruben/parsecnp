@@ -1,5 +1,5 @@
+const CONSTANT = '279146358279';
 const checksumValidator = (cnp, checksum) => {
-    const CONSTANT = '279146358279';
     const reducer = cnp.split('').reduce((accumulator, value, index) => {
         return accumulator + value * CONSTANT.charAt(index);
     }, 0);

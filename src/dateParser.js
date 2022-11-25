@@ -19,7 +19,6 @@ const dateParser = (sexCode, birthdate) => {
 
     return isValidDate(year, month, day) ? date : new Date('');
 };
-
 const dateValidator = (date) => !isNaN(date);
 
 export {

@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rollup --config rollup.config.dist.mjs",
     "dev": "rollup --config rollup.config.dev.mjs --watch",
-    "test": "mocha --require @babel/register ./test/",
+    "test": "TZ='Europe/London' mocha --require @babel/register ./test/",
     "coverage": "nyc mocha --require @babel/register ./test/"
   },
   "repository": "git+https://kislakiruben@github.com/kislakiruben/parsecnp.git",
@@ -26,10 +26,12 @@
     "@babel/preset-env": "^7.20.2",
     "@babel/register": "^7.18.9",
     "@rollup/plugin-babel": "^6.0.3",
-    "chai": "^4.3.3",
-    "mocha": "^8.3.1",
+    "chai": "^4.3.7",
+    "chai-datetime": "^1.8.0",
+    "mocha": "^10.1.0",
     "nyc": "^15.1.0",
     "rollup": "^3.4.0",
-    "rollup-plugin-terser": "^7.0.2"
+    "rollup-plugin-terser": "^7.0.2",
+    "sinon": "^14.0.2"
   }
 }
