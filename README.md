@@ -1,4 +1,4 @@
-# ParseCNP
+# ParseCNP ![example workflow](https://github.com/kislakiruben/parsecnp/actions/workflows/pull-request.yml/badge.svg)
 A parser for CNP (cod numeric personal; romanian SSN).
 
 ## Installation
