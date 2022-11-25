@@ -6,7 +6,6 @@ const SEX_ISO_CODE = {
     2: 'female',
     9: 'not applicable',
 };
-
 const sexMapping = {
     1: SEX_ISO_CODE[1],
     2: SEX_ISO_CODE[2],
@@ -18,7 +17,6 @@ const sexMapping = {
     8: SEX_ISO_CODE[2],
     9: SEX_ISO_CODE[9],
 };
-
 const sexParser = (sexCode) => sexMapping[sexCode] || SEX_ISO_CODE[0];
 const sexValidator = (sexCode) => includes(keys(sexMapping), sexCode);
 

@@ -1,7 +1,5 @@
 const includes = (array, item) => array.includes(item);
-
 const keys = (collection) => Object.keys(collection);
-
 const isValidDate = (year, month, day) => {
     const date = new Date(year, month - 1, day);
     const yearIsValid = parseInt(year, 10) === date.getFullYear();
