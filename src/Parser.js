@@ -63,7 +63,7 @@ export default class Parser {
     }
 
     toString() {
-        return this.raw.toString();
+        return this.raw.cnp.toString();
     }
 
     toJSON() {
