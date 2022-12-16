@@ -1,5 +1,7 @@
 # ParseCNP ![example workflow](https://github.com/kislakiruben/parsecnp/actions/workflows/pull-request.yml/badge.svg)
-A parser for CNP (cod numeric personal; romanian SSN).
+A parser for C.N.P. (short for ***C***od ***N***umeric ***P***ersonal or *Personal Identification Number*).
+
+C.N.P. is a 13 digit unique number assigned to Romanian people at birth and to residents.
 
 ## Installation
 Using npm:
