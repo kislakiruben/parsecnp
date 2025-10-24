@@ -1,5 +1,4 @@
 import counties from "./countyList";
-import { includes, keys } from "./utils";
 
 const countyParser = (countyCode) => {
   const county = counties[countyCode];
@@ -11,6 +10,8 @@ const countyParser = (countyCode) => {
   };
 };
 
-const countyValidator = (countyCode) => includes(keys(counties), countyCode);
+const countyValidator = (countyCode) => {
+  return Object.keys(counties).includes(countyCode);
+};
 
 export { countyParser as default, countyValidator };
