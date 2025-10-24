@@ -1,12 +1,13 @@
-const CONSTANT = '279146358279';
+const CONSTANT = "279146358279";
 const checksumValidator = (cnp, checksum) => {
-    const reducer = cnp.split('').reduce((accumulator, value, index) => {
-        return accumulator + value * CONSTANT.charAt(index);
-    }, 0);
-    const computedChecksum = reducer % 11;
-    const validator = computedChecksum === 10 ? 1 : computedChecksum;
+  let sum = 0;
+  for (let i = 0; i < 12; i++) {
+    sum += parseInt(cnp[i], 10) * parseInt(CONSTANT[i], 10);
+  }
+  const computedChecksum = sum % 11;
+  const validator = computedChecksum === 10 ? 1 : computedChecksum;
 
-    return parseInt(checksum, 10) === validator;
-}
+  return parseInt(checksum, 10) === validator;
+};
 
 export { checksumValidator };
