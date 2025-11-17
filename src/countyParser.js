@@ -1,17 +1,17 @@
-import counties from './countyList';
-import { includes, keys } from './utils';
+import counties from "./countyList";
 
 const countyParser = (countyCode) => {
-    return {
-        code: countyCode,
-        name: counties[countyCode].name,
-        ISO: counties[countyCode].ISO,
-    };
-}
+  const county = counties[countyCode];
 
-const countyValidator = (countyCode) => includes(keys(counties), countyCode);
-
-export {
-    countyParser as default,
-    countyValidator,
+  return {
+    code: countyCode,
+    name: county?.name,
+    ISO: county?.ISO,
+  };
 };
+
+const countyValidator = (countyCode) => {
+  return Object.keys(counties).includes(countyCode);
+};
+
+export { countyParser as default, countyValidator };
