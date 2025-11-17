@@ -6,13 +6,19 @@ import sexParser, { sexValidator } from "./sexParser";
 
 export default class Parser {
   constructor(CNP) {
+    const cnpString = String(CNP);
+
+    if (!/^\d{13}$/.test(cnpString)) {
+      throw new Error("Invalid CNP format: must be exactly 13 numeric digits");
+    }
+
     this.raw = {
-      cnp: CNP,
-      sex: CNP[0],
-      birthdate: CNP.substring(1, 7),
-      county: CNP.substring(7, 9),
-      serial: CNP.substring(9, 12),
-      checksum: CNP[12],
+      cnp: cnpString,
+      sex: cnpString[0],
+      birthdate: cnpString.substring(1, 7),
+      county: cnpString.substring(7, 9),
+      serial: cnpString.substring(9, 12),
+      checksum: cnpString[12],
     };
   }
 

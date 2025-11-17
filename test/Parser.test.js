@@ -45,4 +45,22 @@ describe(`main parser`, () => {
     );
     clock.restore();
   });
+
+  it("should throw if input not long enough", () => {
+    expect(() => new Parser("123456789012")).to.throw(
+      "Invalid CNP format: must be exactly 13 numeric digits",
+    );
+  });
+
+  it("should throw if input too long enough", () => {
+    expect(() => new Parser("12345678901234")).to.throw(
+      "Invalid CNP format: must be exactly 13 numeric digits",
+    );
+  });
+
+  it("should throw if input not alphanumeric", () => {
+    expect(() => new Parser("123456789012A")).to.throw(
+      "Invalid CNP format: must be exactly 13 numeric digits",
+    );
+  });
 });
