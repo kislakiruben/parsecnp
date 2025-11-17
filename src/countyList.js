@@ -1,37 +1,37 @@
 export default {
-  "01": {
+  1: {
     ISO: "AB",
     name: "Alba",
   },
-  "02": {
+  2: {
     ISO: "AR",
     name: "Arad",
   },
-  "03": {
+  3: {
     ISO: "AG",
     name: "Argeș",
   },
-  "04": {
+  4: {
     ISO: "BC",
     name: "Bacău",
   },
-  "05": {
+  5: {
     ISO: "BH",
     name: "Bihor",
   },
-  "06": {
+  6: {
     ISO: "BN",
     name: "Bistrița-Năsăud",
   },
-  "07": {
+  7: {
     ISO: "BT",
     name: "Botoșani",
   },
-  "08": {
+  8: {
     ISO: "BV",
     name: "Brașov",
   },
-  "09": {
+  9: {
     ISO: "BR",
     name: "Brăila",
   },
