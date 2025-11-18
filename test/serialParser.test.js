@@ -1,19 +1,19 @@
-import { expect } from "chai";
+import { expect, describe, it } from "vitest";
 
-import { serialValidator } from "../src/serialParser";
+import { isSerialValid } from "../src/serialParser";
 
 describe(`serial validator`, () => {
   it(`should return 'false' if serial is small or equal to zero`, () => {
-    expect(serialValidator(0)).to.be.false;
-    expect(serialValidator(-1)).to.be.false;
+    expect(isSerialValid("000")).toBe(false);
+    expect(isSerialValid("001")).toBe(true);
   });
 
   it(`should correctly parse if param is a string`, () => {
-    expect(serialValidator("000")).to.be.false;
-    expect(serialValidator("001")).to.be.true;
+    expect(isSerialValid("000")).toBe(false);
+    expect(isSerialValid("001")).toBe(true);
   });
 
   it(`should return 'false' if serial is bigger than 999`, () => {
-    expect(serialValidator("1000")).to.be.false;
+    expect(isSerialValid("1000")).toBe(false);
   });
 });

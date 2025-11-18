@@ -1,4 +1,16 @@
+import type { ValidatorFunction } from "./types";
+
 const CHECKSUM_CONSTANT = "279146358279";
+
+/**
+ * Parses checksum digit from CNP
+ *
+ * @param cnp - Full 13-digit CNP string
+ * @returns Checksum digit string
+ */
+const parseChecksum = (cnp: string): string => {
+  return cnp[12];
+};
 
 /**
  * Validates CNP checksum digit
@@ -9,7 +21,15 @@ const CHECKSUM_CONSTANT = "279146358279";
  * @param checksum - Checksum digit (last digit of CNP)
  * @returns true if checksum is valid
  */
-const checksumValidator = (cnp: string, checksum: string): boolean => {
+export const isChecksumValid: ValidatorFunction<string> = (
+  cnp: string,
+  checksum?: string,
+): boolean => {
+  const checksumDigit = checksum ?? cnp[12];
+  const actualChecksum = parseInt(checksumDigit, 10);
+
+  if (isNaN(actualChecksum)) return false;
+
   let sum = 0;
 
   for (let i = 0; i < 12; i++) {
@@ -18,9 +38,8 @@ const checksumValidator = (cnp: string, checksum: string): boolean => {
 
   const remainder = sum % 11;
   const expectedChecksum = remainder === 10 ? 1 : remainder;
-  const actualChecksum = parseInt(checksum, 10);
 
   return actualChecksum === expectedChecksum;
 };
 
-export { checksumValidator };
+export default parseChecksum;

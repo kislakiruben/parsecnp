@@ -24,7 +24,7 @@ const CENTURY_MAP: CenturyMap = {
  * @param birthdate - Birth date string YYMMDD (positions 2-7 of CNP)
  * @returns Date object, or invalid date if parsing fails
  */
-const dateParser: ParserFunction<SexCodeString, Date> = (
+const parseDate: ParserFunction<SexCodeString, Date> = (
   sexCodeString,
   birthdate,
 ) => {
@@ -66,8 +66,8 @@ const dateParser: ParserFunction<SexCodeString, Date> = (
  * @param date - Date object to validate
  * @returns true if date is valid and not in future
  */
-export const dateValidator: ValidatorFunction<Date> = (date) => {
+export const isDateValid: ValidatorFunction<Date> = (date) => {
   return !isNaN(date.getTime());
 };
 
-export default dateParser;
+export default parseDate;

@@ -35,7 +35,7 @@ const VALID_SEX_CODES: readonly SexCode[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
  * @param sexCode - Sex code string from CNP (first digit)
  * @returns Sex string ("male", "female", etc.)
  */
-const sexParser: ParserFunction<SexCodeString, Sex> = (sexCode) => {
+const parseSex: ParserFunction<SexCodeString, Sex> = (sexCode) => {
   const code = parseInt(sexCode, 10) as SexCode;
 
   return sexMapping[code] || SEX_ISO_CODE[0];
@@ -47,10 +47,10 @@ const sexParser: ParserFunction<SexCodeString, Sex> = (sexCode) => {
  * @param sexCode - Sex code string from CNP
  * @returns true if sex code is valid
  */
-const sexValidator: ValidatorFunction<SexCodeString> = (sexCode) => {
+export const isSexValid: ValidatorFunction<SexCodeString> = (sexCode) => {
   const code = parseInt(sexCode, 10);
 
   return !isNaN(code) && VALID_SEX_CODES.includes(code as SexCode);
 };
 
-export { sexParser as default, sexValidator };
+export default parseSex;

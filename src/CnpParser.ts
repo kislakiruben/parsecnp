@@ -1,8 +1,8 @@
-import { checksumValidator } from "./checksumParser";
-import countyParser, { countyValidator } from "./countyParser";
-import dateParser, { dateValidator } from "./dateParser";
-import { serialValidator } from "./serialParser";
-import sexParser, { sexValidator } from "./sexParser";
+import { isChecksumValid } from "./checksumParser";
+import { isCountyValid, parseCounty } from "./countyParser";
+import { isDateValid, parseDate } from "./dateParser";
+import { isSerialValid } from "./serialParser";
+import { isSexValid, parseSex } from "./sexParser";
 import type { County, ParsedCnp, RawCnp, Sex } from "./types";
 
 /**
@@ -34,11 +34,11 @@ export default class CnpParser implements ParsedCnp {
   }
 
   get sex(): Sex {
-    return sexParser(this.raw.sex);
+    return parseSex(this.raw.sex);
   }
 
   get birthdate(): Date {
-    return dateParser(this.raw.sex, this.raw.birthdate);
+    return parseDate(this.raw.sex, this.raw.birthdate);
   }
 
   get day(): number {
@@ -54,7 +54,7 @@ export default class CnpParser implements ParsedCnp {
   }
 
   get county(): County {
-    return countyParser(this.raw.county);
+    return parseCounty(this.raw.county);
   }
 
   get serial(): string {
@@ -66,18 +66,12 @@ export default class CnpParser implements ParsedCnp {
   }
 
   get isValid(): boolean {
-    const sexIsValid = sexValidator(this.raw.sex);
-    const countyIsValid = countyValidator(this.raw.county);
-    const serialIsValid = serialValidator(this.raw.serial);
-    const checksumIsValid = checksumValidator(this.raw.cnp, this.raw.checksum);
-    const dateIsValid = dateValidator(this.birthdate);
-
     return (
-      sexIsValid &&
-      dateIsValid &&
-      countyIsValid &&
-      serialIsValid &&
-      checksumIsValid
+      isSexValid(this.raw.sex) &&
+      isDateValid(this.birthdate) &&
+      isCountyValid(this.raw.county, this.birthdate) &&
+      isSerialValid(this.raw.serial) &&
+      isChecksumValid(this.raw.cnp, this.raw.checksum)
     );
   }
 

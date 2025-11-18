@@ -1,46 +1,46 @@
-import { expect } from "chai";
+import { expect, describe, it } from "vitest";
 
-import { default as sexParser, sexValidator } from "../src/sexParser";
+import { parseSex, isSexValid } from "../src/sexParser";
 
 describe(`sex parser`, () => {
   it(`should return 'not known' for sex code 0`, () => {
-    expect(sexParser(0)).to.be.string("not known");
+    expect(parseSex("0")).toBe("not known");
   });
 
   it(`should return 'male' for sex code 1`, () => {
-    expect(sexParser(1)).to.be.string("male");
+    expect(parseSex("1")).toBe("male");
   });
 
   it(`should return 'female' for sex code 2`, () => {
-    expect(sexParser(2)).to.be.string("female");
+    expect(parseSex("2")).toBe("female");
   });
 
   it(`should return 'male' for sex code 3`, () => {
-    expect(sexParser(3)).to.be.string("male");
+    expect(parseSex("3")).toBe("male");
   });
 
   it(`should return 'female' for sex code 4`, () => {
-    expect(sexParser(4)).to.be.string("female");
+    expect(parseSex("4")).toBe("female");
   });
 
   it(`should return 'male' for sex code 5`, () => {
-    expect(sexParser(5)).to.be.string("male");
+    expect(parseSex("5")).toBe("male");
   });
 
   it(`should return 'female' for sex code 6`, () => {
-    expect(sexParser(6)).to.be.string("female");
+    expect(parseSex("6")).toBe("female");
   });
 
   it(`should return 'male' for sex code 7`, () => {
-    expect(sexParser(7)).to.be.string("male");
+    expect(parseSex("7")).toBe("male");
   });
 
   it(`should return 'female' for sex code 8`, () => {
-    expect(sexParser(8)).to.be.string("female");
+    expect(parseSex("8")).toBe("female");
   });
 
   it(`should return 'not applicable' for sex code 9`, () => {
-    expect(sexParser(9)).to.be.string("not applicable");
+    expect(parseSex("9")).toBe("not applicable");
   });
 });
 
@@ -49,7 +49,7 @@ describe(`sex validator`, () => {
     const valid = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
     valid.forEach((code) => {
-      expect(sexValidator(code)).to.be.true;
+      expect(isSexValid(code)).toBe(true);
     });
   });
 
@@ -57,7 +57,7 @@ describe(`sex validator`, () => {
     const invalid = ["11", "99", "100"];
 
     invalid.forEach((code) => {
-      expect(sexValidator(code)).to.be.false;
+      expect(isSexValid(code)).toBe(false);
     });
   });
 });
