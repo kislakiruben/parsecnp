@@ -33,11 +33,12 @@
     "dev": "tsdown --watch",
     "test": "TZ='Europe/London' vitest",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "pnpm run build",
-    "coverage": "nyc mocha --require @babel/register ./test/"
+    "prepublishOnly": "npm run build",
+    "coverage": "TZ='Europe/London' vitest --coverage"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
+    "@vitest/coverage-v8": "^4.0.10",
     "nyc": "^15.1.0",
     "tsdown": "^0.16.5",
     "typescript": "^5.9.3"
