@@ -1,9 +1,4 @@
-import type {
-  Sex,
-  SexCode,
-  SexMapping,
-  ParserFunction,
-} from "../types";
+import type { Sex, SexCode, SexMapping, ParserFunction } from "../types";
 
 const SEX_ISO_CODE: Record<number, Sex> = {
   0: "not known",

@@ -12,4 +12,8 @@ describe("isChecksumValid", () => {
     expect(isChecksumValid("5160916081327", "7")).toBe(false);
     expect(isChecksumValid("5031227201941", "1")).toBe(false);
   });
+
+  it("should return false for invalid input", () => {
+    expect(isChecksumValid("foo")).toBe(false);
+  });
 });

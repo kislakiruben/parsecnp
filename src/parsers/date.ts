@@ -1,9 +1,4 @@
-import type {
-  CenturyMap,
-  ParserFunction,
-  SexCodeString,
-  ValidatorFunction,
-} from "../types";
+import type { CenturyMap, ParserFunction, SexCodeString } from "../types";
 import { isValidDate } from "../utils";
 
 const CENTURY_MAP: CenturyMap = {
@@ -58,16 +53,6 @@ export const parseDate: ParserFunction<SexCodeString, Date> = (
   const date = new Date(fullYearNum, monthNum - 1, dayNum, 0, 0, 0, 0);
 
   return date;
-};
-
-/**
- * Validates parsed date
- *
- * @param date - Date object to validate
- * @returns true if date is valid and not in future
- */
-export const isDateValid: ValidatorFunction<Date> = (date) => {
-  return !isNaN(date.getTime());
 };
 
 export default parseDate;

@@ -14,4 +14,12 @@ describe("ParseCnp", () => {
 
     expect(factory).toBeInstanceOf(CnpParser);
   });
+
+  it("should return this when this is already a CnpParser instance", () => {
+    const instance = new CnpParser("2121212261011");
+    const result = ParseCnp.call(instance, "2121212261011");
+
+    expect(result).toBe(instance);
+    expect(result).toBeInstanceOf(CnpParser);
+  });
 });

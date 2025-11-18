@@ -41,4 +41,8 @@ describe("parseSex", () => {
   it("should return 'not applicable' for sex code 9", () => {
     expect(parseSex("9")).toBe("not applicable");
   });
+
+  it("should return 'not known' for unmapped code", () => {
+    expect(parseSex("10")).toBe("not known");
+  });
 });

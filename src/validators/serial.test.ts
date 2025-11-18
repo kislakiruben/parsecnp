@@ -15,4 +15,8 @@ describe("isSerialValid", () => {
   it("should return false if serial is bigger than 999", () => {
     expect(isSerialValid("1000")).toBe(false);
   });
+
+  it("should return false if input is invalid", () => {
+    expect(isSerialValid("foo")).toBe(false);
+  });
 });

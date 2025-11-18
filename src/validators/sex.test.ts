@@ -17,4 +17,8 @@ describe("isSexValid", () => {
       expect(isSexValid(code)).toBe(false);
     });
   });
+
+  it("should return false if input is invalid", () => {
+    expect(isSexValid("foo")).toBe(false);
+  });
 });

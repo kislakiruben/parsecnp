@@ -51,4 +51,23 @@ describe("CnpParser", () => {
       "Invalid CNP format: must be exactly 13 numeric digits",
     );
   });
+
+  it("should accept number input and convert to string", () => {
+    const instance = new CnpParser(6121212261011);
+
+    expect(instance.toString()).toBe("6121212261011");
+    expect(instance.sex).toBe("female");
+    expect(instance.year).toBe(2012);
+  });
+
+  it("should return unknown county for invalid county codes", () => {
+    // Using county code "99" which doesn't exist
+    const instance = new CnpParser("1700101991234");
+
+    expect(instance.county).toEqual({
+      code: "99",
+      name: "Unknown",
+      ISO: "XX",
+    });
+  });
 });

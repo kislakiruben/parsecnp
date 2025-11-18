@@ -21,9 +21,9 @@ export const isCountyValid: ValidatorFunction<CountyCode> = (
   const county = counties[countyCode];
 
   if (!county) return false;
-  if (county.ISO === undefined || county.name === undefined) return false;
   if (countyCode === "47" || countyCode === "48") {
     if (!birthdate) return false;
+
     return birthdate < DISTRICT_ABOLISH_DATE;
   }
 

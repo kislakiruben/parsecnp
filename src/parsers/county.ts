@@ -13,7 +13,6 @@ export const parseCounty: ParserFunction<CountyCode, County | null> = (
   const county = counties[countyCode];
 
   if (!county) return null;
-  if (county.ISO === undefined || county.name === undefined) return null;
 
   return {
     code: countyCode,
