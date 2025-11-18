@@ -16,15 +16,21 @@ import CnpParser from "./CnpParser";
  * const cnp2 = ParseCnp(1700101123456);
  * ```
  */
-function ParseCnp(cnp: string | number): CnpParser {
-  // @ts-ignore
+interface ParseCnpConstructor {
+  (cnp: string | number): CnpParser;
+  new (cnp: string | number): CnpParser;
+}
+
+const ParseCnp: ParseCnpConstructor = function (
+  this: CnpParser | void,
+  cnp: string | number,
+): CnpParser {
   if (!(this instanceof CnpParser)) {
     return new CnpParser(cnp);
   }
 
-  // @ts-ignore
   return this;
-}
+} as ParseCnpConstructor;
 
 export default ParseCnp;
 export type { ParsedCnp, RawCnp, County, Sex } from "./types";

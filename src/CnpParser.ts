@@ -57,7 +57,11 @@ export default class CnpParser implements ParsedCnp {
   }
 
   get county(): County {
-    return parseCounty(this.raw.county);
+    return parseCounty(this.raw.county) ?? {
+      code: this.raw.county,
+      name: "Unknown",
+      ISO: "XX",
+    };
   }
 
   get serial(): string {

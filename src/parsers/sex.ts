@@ -1,7 +1,6 @@
 import type {
   Sex,
   SexCode,
-  SexCodeString,
   SexMapping,
   ParserFunction,
 } from "../types";
@@ -31,7 +30,7 @@ const sexMapping: SexMapping = {
  * @param sexCode - Sex code string from CNP (first digit)
  * @returns Sex string ("male", "female", etc.)
  */
-export const parseSex: ParserFunction<SexCodeString, Sex> = (sexCode) => {
+export const parseSex: ParserFunction<string, Sex> = (sexCode) => {
   const code = parseInt(sexCode, 10) as SexCode;
 
   return sexMapping[code] || SEX_ISO_CODE[0];

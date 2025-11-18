@@ -1,4 +1,4 @@
-import type { SexCode, SexCodeString, ValidatorFunction } from "../types";
+import type { SexCode, ValidatorFunction } from "../types";
 
 /**
  * Valid sex codes
@@ -11,7 +11,7 @@ const VALID_SEX_CODES: readonly SexCode[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
  * @param sexCode - Sex code string from CNP
  * @returns true if sex code is valid
  */
-export const isSexValid: ValidatorFunction<SexCodeString> = (sexCode) => {
+export const isSexValid: ValidatorFunction<string> = (sexCode) => {
   const code = parseInt(sexCode, 10);
 
   return !isNaN(code) && VALID_SEX_CODES.includes(code as SexCode);
