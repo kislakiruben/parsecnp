@@ -45,7 +45,7 @@ export interface County {
 /**
  * Raw CNP components extracted from the 13-digit string
  */
-export interface RawCNP {
+export interface RawCnp {
   cnp: string;
   sex: SexCodeString;
   birthdate: string;
@@ -57,7 +57,7 @@ export interface RawCNP {
 /**
  * Parsed CNP data (public API)
  */
-export interface ParsedCNP {
+export interface ParsedCnp {
   /** Biological sex */
   readonly sex: Sex;
   /** Birth date as Date object */

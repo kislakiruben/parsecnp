@@ -3,14 +3,14 @@ import countyParser, { countyValidator } from "./countyParser";
 import dateParser, { dateValidator } from "./dateParser";
 import { serialValidator } from "./serialParser";
 import sexParser, { sexValidator } from "./sexParser";
-import type { County, ParsedCNP, RawCNP, Sex } from "./types";
+import type { County, ParsedCnp, RawCnp, Sex } from "./types";
 
 /**
  * Main parser class for CNP (Cod Numeric Personal)
  * Validates and parses all components of a Romanian personal identification number
  */
-export default class Parser implements ParsedCNP {
-  private raw: RawCNP;
+export default class CnpParser implements ParsedCnp {
+  private raw: RawCnp;
   /**
    * Creates a new Parser instance
    * @param CNP - 13-digit CNP string or number
@@ -25,7 +25,7 @@ export default class Parser implements ParsedCNP {
 
     this.raw = {
       cnp: cnpString,
-      sex: cnpString[0] as RawCNP["sex"],
+      sex: cnpString[0] as RawCnp["sex"],
       birthdate: cnpString.substring(1, 7),
       county: cnpString.substring(7, 9),
       serial: cnpString.substring(9, 12),

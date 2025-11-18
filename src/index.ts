@@ -1,11 +1,11 @@
 /**
- * ParseCNP - Parser for Romanian Personal Identification Numbers (CNP)
+ * ParseCnp - Parser for Romanian Personal Identification Numbers (CNP)
  * @packageDocumentation
  */
 
-export { default } from "./ParseCNP";
+export { default } from "./ParseCnp";
 export type {
-  ParsedCNP,
+  ParsedCnp,
   County,
   CountyCode,
   CountyISO,
