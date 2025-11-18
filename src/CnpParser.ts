@@ -1,8 +1,11 @@
-import { isChecksumValid } from "./checksumParser";
-import { isCountyValid, parseCounty } from "./countyParser";
-import { isDateValid, parseDate } from "./dateParser";
-import { isSerialValid } from "./serialParser";
-import { isSexValid, parseSex } from "./sexParser";
+import {
+  isChecksumValid,
+  isCountyValid,
+  isDateValid,
+  isSerialValid,
+  isSexValid,
+} from "./validators";
+import { parseCounty, parseDate, parseSex } from "./parsers";
 import type { County, ParsedCnp, RawCnp, Sex } from "./types";
 
 /**

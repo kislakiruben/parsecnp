@@ -1,4 +1,4 @@
-import type { ValidatorFunction } from "./types";
+import type { ValidatorFunction } from "../types";
 
 /**
  * Validates serial number (positions 10-12 of CNP)

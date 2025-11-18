@@ -1,9 +1,8 @@
 import { expect, describe, it, vi } from "vitest";
+import CnpParser from "./CnpParser";
 
-import CnpParser from "../src/CnpParser";
-
-describe(`main parser`, () => {
-  it(`should have getters`, () => {
+describe("CnpParser", () => {
+  it("should have getters", () => {
     const instance = new CnpParser("6121212261011");
 
     expect(instance.sex).toBe("female");
@@ -21,7 +20,7 @@ describe(`main parser`, () => {
     expect(instance.isValid).toBe(false);
   });
 
-  it(`should have methods`, () => {
+  it("should have methods", () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date(2012, 11, 12));
 
@@ -41,7 +40,7 @@ describe(`main parser`, () => {
     );
   });
 
-  it("should throw if input too long enough", () => {
+  it("should throw if input too long", () => {
     expect(() => new CnpParser("12345678901234")).toThrow(
       "Invalid CNP format: must be exactly 13 numeric digits",
     );

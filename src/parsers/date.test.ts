@@ -1,6 +1,6 @@
 import { expect, describe, it } from "vitest";
-
-import { parseDate, isDateValid } from "../src/dateParser";
+import { parseDate } from "./date";
+import { isDateValid } from "../validators/date";
 
 describe(`date parser`, () => {
   it(`should create a correct date object`, () => {

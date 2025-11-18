@@ -3,8 +3,8 @@ import type {
   ParserFunction,
   SexCodeString,
   ValidatorFunction,
-} from "./types";
-import { isValidDate } from "./utils";
+} from "../types";
+import { isValidDate } from "../utils";
 
 const CENTURY_MAP: CenturyMap = {
   1: "19",
@@ -24,7 +24,7 @@ const CENTURY_MAP: CenturyMap = {
  * @param birthdate - Birth date string YYMMDD (positions 2-7 of CNP)
  * @returns Date object, or invalid date if parsing fails
  */
-const parseDate: ParserFunction<SexCodeString, Date> = (
+export const parseDate: ParserFunction<SexCodeString, Date> = (
   sexCodeString,
   birthdate,
 ) => {
