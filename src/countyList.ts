@@ -1,4 +1,6 @@
-export default {
+import type { CountyList } from "./types";
+
+export const countyList: CountyList = {
   1: {
     ISO: "AB",
     name: "Alba",
@@ -199,4 +201,6 @@ export default {
     ISO: "GR",
     name: "Giurgiu",
   },
-};
+} as const;
+
+export default countyList;

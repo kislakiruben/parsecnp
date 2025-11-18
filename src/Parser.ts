@@ -3,10 +3,21 @@ import countyParser, { countyValidator } from "./countyParser";
 import dateParser, { dateValidator } from "./dateParser";
 import { serialValidator } from "./serialParser";
 import sexParser, { sexValidator } from "./sexParser";
+import type { County, ParsedCNP, RawCNP, Sex } from "./types";
 
-export default class Parser {
-  constructor(CNP) {
-    const cnpString = String(CNP);
+/**
+ * Main parser class for CNP (Cod Numeric Personal)
+ * Validates and parses all components of a Romanian personal identification number
+ */
+export default class Parser implements ParsedCNP {
+  private raw: RawCNP;
+  /**
+   * Creates a new Parser instance
+   * @param CNP - 13-digit CNP string or number
+   * @throws Error if CNP is not 13 digits or contains non-numeric characters
+   */
+  constructor(cnp: string | number) {
+    const cnpString = String(cnp);
 
     if (!/^\d{13}$/.test(cnpString)) {
       throw new Error("Invalid CNP format: must be exactly 13 numeric digits");
@@ -14,7 +25,7 @@ export default class Parser {
 
     this.raw = {
       cnp: cnpString,
-      sex: cnpString[0],
+      sex: cnpString[0] as RawCNP["sex"],
       birthdate: cnpString.substring(1, 7),
       county: cnpString.substring(7, 9),
       serial: cnpString.substring(9, 12),
@@ -22,39 +33,39 @@ export default class Parser {
     };
   }
 
-  get sex() {
+  get sex(): Sex {
     return sexParser(this.raw.sex);
   }
 
-  get birthdate() {
+  get birthdate(): Date {
     return dateParser(this.raw.sex, this.raw.birthdate);
   }
 
-  get day() {
+  get day(): number {
     return this.birthdate.getDate();
   }
 
-  get month() {
+  get month(): number {
     return this.birthdate.getMonth() + 1; // month is zero indexed
   }
 
-  get year() {
+  get year(): number {
     return this.birthdate.getFullYear();
   }
 
-  get county() {
+  get county(): County {
     return countyParser(this.raw.county);
   }
 
-  get serial() {
+  get serial(): string {
     return this.raw.serial;
   }
 
-  get checksum() {
+  get checksum(): string {
     return this.raw.checksum;
   }
 
-  get isValid() {
+  get isValid(): boolean {
     const sexIsValid = sexValidator(this.raw.sex);
     const countyIsValid = countyValidator(this.raw.county);
     const serialIsValid = serialValidator(this.raw.serial);
@@ -70,11 +81,11 @@ export default class Parser {
     );
   }
 
-  toString() {
+  toString(): string {
     return this.raw.cnp.toString();
   }
 
-  toJSON() {
+  toJSON(): string {
     return JSON.stringify({
       birthdate: this.birthdate,
       checksum: this.checksum,
