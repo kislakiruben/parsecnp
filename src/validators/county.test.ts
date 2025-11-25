@@ -10,7 +10,7 @@ describe("isCountyValid", () => {
     expect(isCountyValid("99")).toBe(false);
   });
 
-  it("should correctly return for county code 47 and 48 and no birthdate", () => {
+  it("should return false for county code 47 and 48 and no birthdate", () => {
     expect(isCountyValid("47")).toBe(false);
     expect(isCountyValid("48")).toBe(false);
   });
@@ -23,5 +23,32 @@ describe("isCountyValid", () => {
   it("should correctly return for county code 47 and 48 with birthdate before December 19, 1979", () => {
     expect(isCountyValid("47", new Date(1978, 10, 12))).toBe(true);
     expect(isCountyValid("48", new Date(1978, 10, 12))).toBe(true);
+  });
+
+  it("should return false for county code 51 and 52 and no birthdate", () => {
+    expect(isCountyValid("51")).toBe(false);
+    expect(isCountyValid("52")).toBe(false);
+  });
+
+  it("should reject code 51 and 52 for birthdate before Feb 17, 1981", () => {
+    expect(isCountyValid("51", new Date(1981, 1, 16))).toBe(false);
+    expect(isCountyValid("52", new Date(1981, 1, 16))).toBe(false);
+  });
+
+  it("should accept code 51 and 52 for birthdate on/after Feb 17, 1981", () => {
+    expect(isCountyValid("51", new Date(1981, 1, 17))).toBe(true);
+    expect(isCountyValid("52", new Date(1981, 1, 17))).toBe(true);
+  });
+
+  it("should return false for county code 23 and no birthdate", () => {
+    expect(isCountyValid("23")).toBe(false);
+  });
+
+  it("should reject code 23 (Ilfov) for birthdate before Feb 14, 1968", () => {
+    expect(isCountyValid("23", new Date(1968, 1, 13))).toBe(false);
+  });
+
+  it("should accept code 23 (Ilfov) for birthdate on/after Feb 14, 1968", () => {
+    expect(isCountyValid("23", new Date(1968, 1, 14))).toBe(true);
   });
 });

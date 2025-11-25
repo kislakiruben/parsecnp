@@ -7,6 +7,16 @@ import type { CountyCode, ValidatorFunction } from "../types";
 const DISTRICT_ABOLISH_DATE = new Date(1979, 11, 19); // December 19, 1979
 
 /**
+ * Date when Călărași and Giurgiu counties (codes 51-52) were created
+ */
+const COUNTY_51_52_CREATE_DATE = new Date(1981, 1, 17); // February 17, 1981
+
+/**
+ * Date when Ilfov county (code 23) was re-established
+ */
+const ILFOV_REESTABLISH_DATE = new Date(1968, 1, 14); // February 14, 1968
+
+/**
  * Validates county code
  * Special handling for defunct districts 47-48 (valid only before Dec 19, 1979)
  *
@@ -25,6 +35,16 @@ export const isCountyValid: ValidatorFunction<CountyCode> = (
     if (!birthdate) return false;
 
     return birthdate < DISTRICT_ABOLISH_DATE;
+  }
+  if (countyCode === "51" || countyCode === "52") {
+    if (!birthdate) return false;
+
+    return birthdate >= COUNTY_51_52_CREATE_DATE;
+  }
+  if (countyCode === "23") {
+    if (!birthdate) return false;
+
+    return birthdate >= ILFOV_REESTABLISH_DATE;
   }
 
   return true;
