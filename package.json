@@ -45,5 +45,9 @@
   "dependencies": {
     "bumpp": "^10.3.1",
     "vitest": "^4.0.10"
+  },
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
