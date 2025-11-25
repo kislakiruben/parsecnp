@@ -18,14 +18,9 @@ describe("parseCounty", () => {
     });
   });
 
-  it("should correctly return for county code 47 and 48", () => {
-    ["47", "48"].forEach((countyCode) => {
-      expect(parseCounty(countyCode)).toMatchObject({
-        ISO: undefined,
-        code: countyCode,
-        name: undefined,
-      });
-    });
+  it("should return null for defunct county codes 47 and 48", () => {
+    expect(parseCounty("47")).toBe(null);
+    expect(parseCounty("48")).toBe(null);
   });
 
   it("should return null if county is not in county list", () => {

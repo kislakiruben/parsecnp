@@ -100,7 +100,7 @@ export type SexMapping = Record<SexCode, Sex>;
 /**
  * Century mapping from sex code to century prefix
  */
-export type CenturyMap = Record<Exclude<SexCode, 7 | 8 | 9>, string>;
+export type CenturyMap = Record<Exclude<SexCode, 7 | 8>, string>;
 
 /**
  * Parser function type

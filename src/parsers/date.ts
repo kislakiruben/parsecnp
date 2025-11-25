@@ -8,7 +8,7 @@ const CENTURY_MAP: CenturyMap = {
   4: "18",
   5: "20",
   6: "20",
-  // 9: "19", // Foreign nationals / Not applicable (default to 19xx)
+  9: "19", // Foreign nationals / Not applicable (default to 19xx)
 };
 
 /**
