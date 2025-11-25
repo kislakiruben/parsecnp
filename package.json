@@ -2,36 +2,48 @@
   "name": "parsecnp",
   "version": "0.1.9",
   "description": "'Parser' pentru cod numeric personal (CNP)",
-  "main": "src/ParseCNP.js",
-  "scripts": {
-    "build": "rollup --config rollup.config.dist.mjs",
-    "dev": "rollup --config rollup.config.dev.mjs --watch",
-    "test": "TZ='Europe/London' mocha --require @babel/register ./test/",
-    "coverage": "nyc mocha --require @babel/register ./test/"
+  "type": "module",
+  "license": "MIT",
+  "homepage": "https://github.com/kislakiruben/parsecnp#readme",
+  "bugs": {
+    "url": "https://github.com/kislakiruben/parsecnp/issues"
   },
-  "repository": "git+https://kislakiruben@github.com/kislakiruben/parsecnp.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://kislakiruben@github.com/kislakiruben/parsecnp.git"
+  },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "cnp",
     "parser",
     "javsacript"
   ],
   "author": "Ruben Kislaki",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/kislakiruben/parsecnp/issues"
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
   },
-  "homepage": "https://github.com/kislakiruben/parsecnp#readme",
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "test": "TZ='Europe/London' vitest",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run build",
+    "coverage": "nyc mocha --require @babel/register ./test/"
+  },
   "devDependencies": {
-    "@babel/core": "^7.20.2",
-    "@babel/preset-env": "^7.20.2",
-    "@babel/register": "^7.18.9",
-    "@rollup/plugin-babel": "^6.0.3",
-    "chai": "^4.3.7",
-    "chai-datetime": "^1.8.0",
-    "mocha": "^10.1.0",
+    "@types/node": "^24.10.1",
     "nyc": "^15.1.0",
-    "rollup": "^3.4.0",
-    "rollup-plugin-terser": "^7.0.2",
-    "sinon": "^14.0.2"
+    "tsdown": "^0.16.5",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "bumpp": "^10.3.1",
+    "vitest": "^4.0.10"
   }
 }
