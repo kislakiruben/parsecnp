@@ -18,7 +18,9 @@
   "keywords": [
     "cnp",
     "parser",
-    "javsacript"
+    "javascript",
+    "typescript",
+    "validator"
   ],
   "author": "Ruben Kislaki",
   "main": "./dist/index.mjs",
