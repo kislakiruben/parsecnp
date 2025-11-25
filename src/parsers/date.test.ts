@@ -33,4 +33,20 @@ describe("date parser", () => {
   it("should return invalid date if date is invalid", () => {
     expect(parseDate("8", "121340")).toEqual(new Date(""));
   });
+
+  it("should handle leap year Feb 29", () => {
+    // Sex code 5 = 2000-2099, year 00 = 2000 (which IS a leap year)
+    expect(parseDate("5", "000229")).toEqual(new Date(2000, 1, 29));
+    // Sex code 1 = 1900-1999, year 96 = 1996 (leap year)
+    expect(parseDate("1", "960229")).toEqual(new Date(1996, 1, 29));
+  });
+
+  it("should handle century transitions", () => {
+    // Sex code 1 = 1900-1999
+    expect(parseDate("1", "990101")).toEqual(new Date(1999, 0, 1));
+    expect(parseDate("1", "000101")).toEqual(new Date(1900, 0, 1));
+    // Sex code 5 = 2000-2099
+    expect(parseDate("5", "000101")).toEqual(new Date(2000, 0, 1));
+    expect(parseDate("5", "990101")).toEqual(new Date(2099, 0, 1));
+  });
 });
