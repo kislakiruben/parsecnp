@@ -199,4 +199,8 @@ export default {
     ISO: "GR",
     name: "Giurgiu",
   },
+  70: {
+    ISO: undefined,
+    name: "Cod unic",
+  },
 };
