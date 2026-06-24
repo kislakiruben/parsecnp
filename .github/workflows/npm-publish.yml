@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
       - run: yarn install --frozen-lockfile
       - run: yarn test
 
@@ -19,12 +19,13 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write # push the version bump commit back to master
-      id-token: write # enable npm provenance
+      id-token: write # mint the OIDC token for npm Trusted Publishing
     steps:
       - uses: actions/checkout@v4
+      # Node 24 bundles npm >= 11.5.1, required for Trusted Publishing (OIDC).
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           registry-url: https://registry.npmjs.org/
       - run: git config user.email "ruben@kislaki.net"
       - run: git config user.name "Ruben"
@@ -32,12 +33,11 @@ jobs:
       - run: yarn version --new-version ${{ github.event.release.tag_name }} --no-git-tag-version
       - run: yarn install --frozen-lockfile
       - run: yarn build
-      # Use `npm publish` (not `yarn publish`): it reliably reads NODE_AUTH_TOKEN from the
-      # .npmrc that setup-node writes. A misauthenticated request returns a misleading
-      # "Not found" (404), which is what broke the previous release.
-      - run: npm publish --access public --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # Tokenless publish via npm Trusted Publishing: authentication uses the short-lived
+      # OIDC token (id-token: write) — no NPM_TOKEN secret needed. Requires a trusted
+      # publisher to be configured for this package on npmjs.com pointing at this workflow.
+      # Provenance is generated automatically.
+      - run: npm publish --access public
       - run: git commit -am "Released v${{ github.event.release.tag_name }}" && git push origin HEAD:master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
