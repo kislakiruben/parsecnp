@@ -7,31 +7,37 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 20
       - run: yarn install --frozen-lockfile
       - run: yarn test
 
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # push the version bump commit back to master
+      id-token: write # enable npm provenance
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 20
           registry-url: https://registry.npmjs.org/
-      - run: yarn config set version-git-message "Released v%s"
       - run: git config user.email "ruben@kislaki.net"
       - run: git config user.name "Ruben"
-      - run: yarn version --new-version ${{ github.event.release.tag_name }}
+      # Bump the version locally without creating a git tag (the release already has one).
+      - run: yarn version --new-version ${{ github.event.release.tag_name }} --no-git-tag-version
       - run: yarn install --frozen-lockfile
       - run: yarn build
-      - run: yarn publish
+      # Use `npm publish` (not `yarn publish`): it reliably reads NODE_AUTH_TOKEN from the
+      # .npmrc that setup-node writes. A misauthenticated request returns a misleading
+      # "Not found" (404), which is what broke the previous release.
+      - run: npm publish --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: git push origin HEAD:master
+      - run: git commit -am "Released v${{ github.event.release.tag_name }}" && git push origin HEAD:master
         env:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
