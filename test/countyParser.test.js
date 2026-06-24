@@ -27,6 +27,22 @@ describe(`county parser`, () => {
     });
   });
 
+  it(`should return county code, name and ISO code if params is a two-digit string`, () => {
+    expect(countyParser("09")).to.include({
+      code: "09",
+      name: "Brăila",
+      ISO: "BR",
+    });
+  });
+
+  it(`should return county code for the unique registration code`, () => {
+    expect(countyParser("70")).to.include({
+      code: "70",
+      name: "Cod unic",
+      ISO: undefined,
+    });
+  });
+
   it(`should return object if county is not in county list`, () => {
     expect(countyParser("99")).to.include({
       code: "99",
@@ -39,6 +55,14 @@ describe(`county parser`, () => {
 describe(`county validator`, () => {
   it(`should return 'true' if county is in county list`, () => {
     expect(countyValidator("26")).to.be.true;
+  });
+
+  it(`should return 'true' if county is a two-digit county code`, () => {
+    expect(countyValidator("09")).to.be.true;
+  });
+
+  it(`should return 'true' if county is the unique registration code`, () => {
+    expect(countyValidator("70")).to.be.true;
   });
 
   it(`should return 'false' if county is not in county list`, () => {

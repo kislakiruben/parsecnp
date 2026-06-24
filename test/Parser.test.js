@@ -35,6 +35,17 @@ describe(`main parser`, () => {
     expect(instance.isValid).to.be.false;
   });
 
+  it(`should validate CNPs generated with the unique county code`, () => {
+    const instance = new Parser("1660302702618");
+
+    expect(instance.county).to.include({
+      code: "70",
+      name: "Cod unic",
+      ISO: undefined,
+    });
+    expect(instance.isValid).to.be.true;
+  });
+
   it(`should have methods`, () => {
     const instance = new Parser("6121212261011");
     const clock = sinon.useFakeTimers(new Date(2012, 11, 12).getTime());
