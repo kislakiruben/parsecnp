@@ -5,7 +5,7 @@ export default {
     plugins: [
         babel({
             babelHelpers: 'bundled'
-        })
+        }),
     ],
     output: {
         file: 'dist/ParseCNP.min.js',
