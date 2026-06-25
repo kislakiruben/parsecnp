@@ -18,7 +18,6 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     permissions:
-      contents: write # push the version bump commit back to master
       id-token: write # mint the OIDC token for npm Trusted Publishing
     steps:
       - uses: actions/checkout@v4
@@ -27,9 +26,9 @@ jobs:
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org/
-      - run: git config user.email "ruben@kislaki.net"
-      - run: git config user.name "Ruben"
-      # Bump the version locally without creating a git tag (the release already has one).
+      # Set the published version from the release tag. --no-git-tag-version keeps it local
+      # to the runner: it only affects the tarball npm publishes, not the repo (master is a
+      # protected branch and the bump is driven by the git tag, not package.json).
       - run: yarn version --new-version ${{ github.event.release.tag_name }} --no-git-tag-version
       - run: yarn install --frozen-lockfile
       - run: yarn build
@@ -38,6 +37,3 @@ jobs:
       # publisher to be configured for this package on npmjs.com pointing at this workflow.
       # Provenance is generated automatically.
       - run: npm publish --access public
-      - run: git commit -am "Released v${{ github.event.release.tag_name }}" && git push origin HEAD:master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
