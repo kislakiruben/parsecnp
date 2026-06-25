@@ -17,7 +17,7 @@ describe("date parser", () => {
 
   it("should correctly parse foreign nationals (sex code 9)", () => {
     expect(parseDate("9", "850505")).toEqual(new Date(1985, 4, 5));
-    expect(parseDate("9", "120401")).toEqual(new Date(2012, 3, 1));
+    expect(parseDate("9", "120401")).toEqual(new Date(1912, 3, 1));
   });
 
   it("should handle invalid dates", () => {

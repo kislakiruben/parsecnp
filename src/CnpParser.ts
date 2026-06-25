@@ -41,15 +41,18 @@ export default class CnpParser implements ParsedCnp {
   }
 
   get day(): number {
-    return this.birthdate.getDate();
+    const date = this.birthdate;
+    return isNaN(date.getTime()) ? 0 : date.getDate();
   }
 
   get month(): number {
-    return this.birthdate.getMonth() + 1;
+    const date = this.birthdate;
+    return isNaN(date.getTime()) ? 0 : date.getMonth() + 1;
   }
 
   get year(): number {
-    return this.birthdate.getFullYear();
+    const date = this.birthdate;
+    return isNaN(date.getTime()) ? 0 : date.getFullYear();
   }
 
   get county(): County {
@@ -102,7 +105,7 @@ export default class CnpParser implements ParsedCnp {
     return {
       cnp: this._raw.cnp,
       sex: this.sex,
-      birthdate: this.birthdate.toISOString(),
+      birthdate: (() => { const d = this.birthdate; return isNaN(d.getTime()) ? null : d.toISOString(); })(),
       year: this.year,
       month: this.month,
       day: this.day,

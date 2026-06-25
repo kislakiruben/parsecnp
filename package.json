@@ -3,6 +3,7 @@
   "version": "0.1.9",
   "description": "'Parser' pentru cod numeric personal (CNP)",
   "type": "module",
+  "files": ["dist"],
   "main": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
   "exports": {

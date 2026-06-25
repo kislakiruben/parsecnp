@@ -18,9 +18,17 @@ describe("county parser", () => {
     });
   });
 
-  it("should return null for codes 47-48", () => {
-    expect(parseCounty("47")).toBeNull();
-    expect(parseCounty("48")).toBeNull();
+  it("should return county info for historical codes 47-48", () => {
+    expect(parseCounty("47")).toEqual({
+      code: "47",
+      name: "București Sector 7",
+      ISO: "B",
+    });
+    expect(parseCounty("48")).toEqual({
+      code: "48",
+      name: "București Sector 8",
+      ISO: "B",
+    });
   });
 
   it("should return null for unknown county code", () => {
@@ -31,7 +39,7 @@ describe("county parser", () => {
     expect(parseCounty("70")).toEqual({
       code: "70",
       name: "Cod unic",
-      ISO: undefined,
+      ISO: "XX",
     });
   });
 });

@@ -5,16 +5,23 @@ const CHECKSUM_CONSTANT = "279146358279";
 
 const charAt = (s: string, i: number): string => s[i] ?? "";
 
-export function isChecksumValid(cnp: string, checksum?: string): boolean {
-  const checksumDigit = checksum ?? charAt(cnp, 12);
-  const actualChecksum = parseInt(checksumDigit, 10);
-  if (isNaN(actualChecksum)) return false;
+function computeChecksum(cnp: string): number | null {
+  const digit = cnp[12];
+  const actualChecksum = digit ? parseInt(digit, 10) : NaN;
+  if (isNaN(actualChecksum)) return null;
   let sum = 0;
   for (let i = 0; i < 12; i++) {
     sum += parseInt(charAt(cnp, i), 10) * parseInt(charAt(CHECKSUM_CONSTANT, i), 10);
   }
   const remainder = sum % 11;
-  return actualChecksum === (remainder === 10 ? 1 : remainder);
+  return remainder === 10 ? 1 : remainder;
+}
+
+export function isChecksumValid(cnp: string, checksum?: string): boolean {
+  const digit = checksum ?? charAt(cnp, 12);
+  const actual = parseInt(digit, 10);
+  if (isNaN(actual)) return false;
+  return actual === computeChecksum(cnp);
 }
 
 export function validateChecksum(
@@ -30,12 +37,7 @@ export function validateChecksum(
       `Invalid checksum: must be a digit, got "${checksumDigit}"`,
     );
   }
-  let sum = 0;
-  for (let i = 0; i < 12; i++) {
-    sum += parseInt(charAt(cnp, i), 10) * parseInt(charAt(CHECKSUM_CONSTANT, i), 10);
-  }
-  const remainder = sum % 11;
-  const expectedChecksum = remainder === 10 ? 1 : remainder;
+  const expectedChecksum = computeChecksum(cnp);
   if (actualChecksum !== expectedChecksum) {
     return createValidationError(
       "checksum",

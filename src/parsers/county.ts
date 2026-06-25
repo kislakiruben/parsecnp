@@ -13,7 +13,7 @@ export function parseCounty(countyCode: string): County | null {
     return null;
   }
   if (county.name === undefined || county.ISO === undefined) {
-    return { code: countyCode, name: county.name, ISO: county.ISO } as County;
+    return { code: countyCode, name: county.name ?? "Unknown", ISO: county.ISO ?? "XX" };
   }
   return { code: countyCode, name: county.name, ISO: county.ISO };
 }

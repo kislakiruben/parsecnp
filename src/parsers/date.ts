@@ -15,7 +15,7 @@ export function parseDate(sexCodeString: string, birthdate: string): Date {
   const month = birthdate.substring(2, 4);
   const day = birthdate.substring(4, 6);
 
-  const isResident = ["7", "8", "9"].includes(sexCodeString);
+  const isResident = ["7", "8"].includes(sexCodeString);
 
   let century: string;
   if (isResident) {
