@@ -2,28 +2,42 @@
   "name": "parsecnp",
   "version": "0.1.9",
   "description": "'Parser' pentru cod numeric personal (CNP)",
-  "main": "dist/ParseCNP.min.js",
+  "type": "module",
+  "files": ["dist"],
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    }
+  },
   "scripts": {
-    "build": "rollup --config rollup.config.mjs",
-    "dev": "rollup --config rollup.config.dev.mjs --watch",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
     "test": "TZ='Europe/London' vitest run",
-    "coverage": "TZ='Europe/London' vitest run --coverage",
     "typecheck": "tsc --noEmit",
+    "coverage": "TZ='Europe/London' vitest run --coverage",
     "prepare": "pnpm build"
   },
   "repository": "git+https://kislakiruben@github.com/kislakiruben/parsecnp.git",
-  "keywords": ["cnp", "parser", "javascript"],
+  "keywords": [
+    "cnp",
+    "parser",
+    "javascript"
+  ],
   "author": "Ruben Kislaki",
   "license": "MIT",
-  "bugs": { "url": "https://github.com/kislakiruben/parsecnp/issues" },
+  "bugs": {
+    "url": "https://github.com/kislakiruben/parsecnp/issues"
+  },
   "homepage": "https://github.com/kislakiruben/parsecnp#readme",
   "devDependencies": {
-    "@babel/core": "^7.20.2",
-    "@babel/preset-env": "^7.20.2",
-    "@rollup/plugin-babel": "^6.0.3",
-    "rollup": "^3.4.0",
-    "rollup-plugin-terser": "^7.0.2",
+    "tsdown": "^0.22.3",
     "typescript": "^5.9.3",
+    "unrun": "^0.3.1",
     "vitest": "^4.1.9",
     "@vitest/coverage-v8": "^4.1.9"
   },
