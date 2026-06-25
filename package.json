@@ -5,11 +5,13 @@
   "main": "dist/ParseCNP.min.js",
   "scripts": {
     "build": "rollup --config rollup.config.mjs",
-    "dev": "rollup --config rollup.config.mjs --watch",
+    "dev": "rollup --config rollup.config.dev.mjs --watch",
     "test": "TZ='Europe/London' vitest run",
     "coverage": "TZ='Europe/London' vitest run --coverage",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepare": "pnpm build"
   },
+  "types": "src/ParseCNP.js",
   "repository": "git+https://kislakiruben@github.com/kislakiruben/parsecnp.git",
   "keywords": ["cnp", "parser", "javascript"],
   "author": "Ruben Kislaki",
@@ -23,7 +25,8 @@
     "rollup": "^3.4.0",
     "rollup-plugin-terser": "^7.0.2",
     "typescript": "^5.9.3",
-    "vitest": "^4.1.9"
+    "vitest": "^4.1.9",
+    "@vitest/coverage-v8": "^4.1.9"
   },
   "packageManager": "pnpm@10.8.1"
 }

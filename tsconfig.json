@@ -7,7 +7,8 @@
     "noEmit": true,
     "isolatedModules": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "allowJs": true
   },
   "include": ["src/**/*.js", "test/**/*.js", "*.config.ts"]
 }
