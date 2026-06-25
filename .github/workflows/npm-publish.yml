@@ -8,32 +8,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
-      - run: yarn install --frozen-lockfile
-      - run: yarn test
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test
 
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
     permissions:
-      id-token: write # mint the OIDC token for npm Trusted Publishing
+      id-token: write
     steps:
       - uses: actions/checkout@v4
-      # Node 24 bundles npm >= 11.5.1, required for Trusted Publishing (OIDC).
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 22
+          cache: pnpm
           registry-url: https://registry.npmjs.org/
-      # Set the published version from the release tag. --no-git-tag-version keeps it local
-      # to the runner: it only affects the tarball npm publishes, not the repo (master is a
-      # protected branch and the bump is driven by the git tag, not package.json).
-      - run: yarn version --new-version ${{ github.event.release.tag_name }} --no-git-tag-version
-      - run: yarn install --frozen-lockfile
-      - run: yarn build
-      # Tokenless publish via npm Trusted Publishing: authentication uses the short-lived
-      # OIDC token (id-token: write) — no NPM_TOKEN secret needed. Requires a trusted
-      # publisher to be configured for this package on npmjs.com pointing at this workflow.
-      # Provenance is generated automatically.
+      - run: pnpm version ${{ github.event.release.tag_name }} --no-git-tag-version
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
       - run: npm publish --access public
