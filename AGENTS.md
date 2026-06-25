@@ -35,17 +35,29 @@ Coverage: `pnpm coverage` (vitest --coverage).
 
 ## Architecture
 
+### Entry Point Flow
+
+The library uses a factory pattern via the interface-merged `ParseCnp()` function. Called with or without `new`, it returns a `CnpParser` instance. Static methods `ParseCnp.isValid()` and `ParseCnp.validate()` are also available.
+
+### Module Layout
+
 ```
 src/index.ts       — entrypoint: factory function + static isValid/validate
-src/CnpParser.ts   — core class: parses raw CNP, exposes typed getters, aggregates validators
-src/types.ts       — shared interfaces (ParsedCnp, RawCnp, County, ValidationError, etc.)
-src/countyList.ts  — static county lookup table (all 52 codes)
+src/CnpParser.ts   — core class: parses raw CNP (13-digit regex), exposes typed getters, aggregates validators
+src/types.ts       — shared interfaces (ParsedCnp, RawCnp, County, ValidationError, Sex, etc.)
+src/countyList.ts  — static county lookup table (all 52 codes + code 70)
 src/utils.ts       — isValidDate helper
 src/parsers/       — per-segment parser functions (sex, date, county)
 src/validators/    — per-segment validator functions (sex, date, county, serial, checksum) + helpers
 ```
 
-Each module has a co-located `.test.ts` (52 tests total).
+### Module Convention
+
+Each CNP segment has a matching pair in `parsers/` (raw → human-readable) and `validators/` (raw → boolean + error). All modules have co-located `.test.ts` files (52 tests total).
+
+### Checksum Algorithm
+
+Constant `279146358279`. Multiply each of the first 12 CNP digits by the corresponding constant digit, sum, `% 11`. If remainder is 10 → checksum is 1, else checksum is the remainder.
 
 ## CI
 
